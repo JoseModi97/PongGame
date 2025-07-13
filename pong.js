@@ -43,6 +43,12 @@ $(document).ready(function () {
         resetGame();
     });
 
+    function resizeCanvas() {
+        canvas.width = window.innerWidth * 0.8;
+        canvas.height = window.innerHeight * 0.8;
+        resetGame();
+    }
+
     function resetGame() {
         playerScore = 0;
         computerScore = 0;
@@ -209,6 +215,6 @@ $(document).ready(function () {
     }
 
     // Initial setup
-    resetGame(); // Start with a reset to initialize scores and ball
-    // gameLoop(); // resetGame will call gameLoop if gameRunning is true
+    $(window).resize(resizeCanvas);
+    resizeCanvas(); // Initial resize
 });
