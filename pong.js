@@ -44,8 +44,9 @@ $(document).ready(function () {
     });
 
     function resizeCanvas() {
-        canvas.width = window.innerWidth * 0.8;
-        canvas.height = window.innerHeight * 0.8;
+        const container = document.querySelector('.container');
+        canvas.width = container.clientWidth;
+        canvas.height = window.innerHeight - container.offsetTop - 100;
         resetGame();
     }
 
