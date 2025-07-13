@@ -3,9 +3,9 @@ $(document).ready(function () {
     const context = canvas.getContext('2d');
 
     // Game constants
-    let paddleWidth = 15;
-    let paddleHeight = 100;
-    let ballRadius = 8;
+    const paddleWidth = 15;
+    const paddleHeight = 100;
+    const ballRadius = 8;
     const winningScore = 10;
 
     let playerY = canvas.height / 2 - paddleHeight / 2;
@@ -42,33 +42,6 @@ $(document).ready(function () {
     $('#restart-btn').click(function () {
         resetGame();
     });
-
-    function resizeCanvas() {
-        const aspectRatio = 800 / 600;
-        let newWidth = window.innerWidth;
-        let newHeight = window.innerHeight;
-        const newAspectRatio = newWidth / newHeight;
-
-        if (newAspectRatio > aspectRatio) {
-            newWidth = newHeight * aspectRatio;
-        } else {
-            newHeight = newWidth / aspectRatio;
-        }
-
-        canvas.width = newWidth;
-        canvas.height = newHeight;
-
-        const container = document.querySelector('.container');
-        container.style.height = `${window.innerHeight}px`;
-
-        // Scale game elements
-        const scale = canvas.width / 800;
-        paddleWidth = 15 * scale;
-        paddleHeight = 100 * scale;
-        ballRadius = 8 * scale;
-
-        resetGame();
-    }
 
     function resetGame() {
         playerScore = 0;
@@ -236,6 +209,6 @@ $(document).ready(function () {
     }
 
     // Initial setup
-    $(window).resize(resizeCanvas);
-    resizeCanvas(); // Initial resize
+    resetGame(); // Start with a reset to initialize scores and ball
+    // gameLoop(); // resetGame will call gameLoop if gameRunning is true
 });
