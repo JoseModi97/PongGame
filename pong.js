@@ -3,9 +3,9 @@ $(document).ready(function () {
     const context = canvas.getContext('2d');
 
     // Game constants
-    const paddleWidth = 15;
-    const paddleHeight = 100;
-    const ballRadius = 8;
+    let paddleWidth = 15;
+    let paddleHeight = 100;
+    let ballRadius = 8;
     const winningScore = 10;
 
     let playerY = canvas.height / 2 - paddleHeight / 2;
@@ -44,9 +44,29 @@ $(document).ready(function () {
     });
 
     function resizeCanvas() {
+        const aspectRatio = 800 / 600;
+        let newWidth = window.innerWidth;
+        let newHeight = window.innerHeight;
+        const newAspectRatio = newWidth / newHeight;
+
+        if (newAspectRatio > aspectRatio) {
+            newWidth = newHeight * aspectRatio;
+        } else {
+            newHeight = newWidth / aspectRatio;
+        }
+
+        canvas.width = newWidth;
+        canvas.height = newHeight;
+
         const container = document.querySelector('.container');
-        canvas.width = container.clientWidth;
-        canvas.height = window.innerHeight - container.offsetTop - 100;
+        container.style.height = `${window.innerHeight}px`;
+
+        // Scale game elements
+        const scale = canvas.width / 800;
+        paddleWidth = 15 * scale;
+        paddleHeight = 100 * scale;
+        ballRadius = 8 * scale;
+
         resetGame();
     }
 
